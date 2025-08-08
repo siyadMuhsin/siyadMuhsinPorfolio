@@ -1,0 +1,195 @@
+'use client'
+
+import { useState } from 'react'
+import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react'
+
+export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  })
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // Handle form submission here
+    console.log('Form submitted:', formData)
+    // Reset form
+    setFormData({
+      name: '',
+      email: '',
+      subject: '',
+      message: ''
+    })
+    alert('Thank you for your message! I\'ll get back to you soon.')
+  }
+
+  return (
+    <section id="contact" className="py-16 bg-black">
+      <div className="container mx-auto px-4">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12 text-white">
+            Get In <span className="text-green-500">Touch</span>
+          </h2>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Contact Information */}
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-2xl font-semibold mb-4 text-white">
+                  Let's Connect
+                </h3>
+                <p className="text-gray-400 mb-6">
+                  I'm always interested in new opportunities and exciting projects. 
+                  Whether you have a question or just want to say hi, feel free to reach out!
+                </p>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="flex items-center gap-4 p-4 bg-black-900 rounded-lg border border-green-500 transition-colors">
+                  <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Mail size={20} className="text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-white">Email</h4>
+                    <a href="mailto:siyad@example.com" className="text-green-400 hover:underline">
+                      siyadsm4065@gmail.com
+                    </a>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-4 p-4  border-green-500 rounded-lg border  transition-colors">
+                  <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Phone size={20} className="text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-white">Phone</h4>
+                    <a href="tel:+919876543210" className="text-green-400 hover:underline">
+                      +91 9947774065
+                    </a>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-4 p-4  rounded-lg border border-green-500 transition-colors">
+                  <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <MapPin size={20} className="text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-white">Location</h4>
+                    <p className="text-gray-400">Calicut, Kerala, India</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex gap-4 pt-2">
+                <a
+                  href="https://github.com/siyadMuhsin"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors border border-gray-700 hover:border-green-500"
+                  aria-label="GitHub"
+                >
+                  <Github size={20} className="text-white" />
+                </a>
+                <a
+                  href="https://linkedin.com/in/siyad"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700 transition-colors border border-green-600 hover:border-green-400"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin size={20} className="text-white" />
+                </a>
+              </div>
+            </div>
+            
+            {/* Contact Form */}
+            <div className="bg-gray-900 rounded-xl p-6 border border-green-500">
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gray-800 border border-gray-700 text-white placeholder-gray-500"
+                    placeholder="Your Name"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-white-300 mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gray-800 border border-gray-700 text-white placeholder-gray-500"
+                    placeholder="your.email@example.com"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
+                    Subject
+                  </label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gray-800 border border-gray-700 text-white placeholder-gray-500"
+                    placeholder="What's this about?"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={5}
+                    className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gray-800 border border-gray-700 text-white placeholder-gray-500 resize-none"
+                    placeholder="Your message..."
+                  />
+                </div>
+                
+                <button
+                  type="submit"
+                  className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 group"
+                >
+                  <span>Send Message</span>
+                  <Send size={18} className="group-hover:translate-x-1 transition-transform" />
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
