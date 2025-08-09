@@ -44,7 +44,7 @@ export default function About() {
                     allowing me to build complete, scalable solutions.
                   </p>
                   <p className="text-lg leading-relaxed">
-                    I'm particularly passionate about creating user-centric applications 
+                    I m particularly passionate about creating user-centric applications 
                     that not only meet technical requirements but also provide exceptional 
                     user experiences. My expertise in Data Structures & Algorithms helps 
                     me write efficient, optimized code that performs well at scale.

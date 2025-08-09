@@ -68,7 +68,7 @@ export default function Hero() {
               variants={fadeInUp}
               className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight"
             >
-              Hi, I'm <span className="text-green-500 whitespace-nowrap">Siyad Muhsin K</span>
+              Hi, I&apos;m <span className="text-green-500 whitespace-nowrap">Siyad Muhsin K</span>
             </motion.h1>
 
             <motion.div variants={fadeInUp} className="h-20 mb-6">

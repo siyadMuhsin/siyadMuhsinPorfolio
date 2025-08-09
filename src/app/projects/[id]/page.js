@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { FiGithub, FiExternalLink, FiCheck, FiChevronLeft, FiChevronRight } from "react-icons/fi"
 import { useState } from "react"
 import { SiGithub } from "react-icons/si"
+import Image from "next/image"
 
 export default function ProjectDetails() {
   const { id } = useParams()
@@ -251,7 +252,7 @@ export default function ProjectDetails() {
                     className="flex items-center gap-2 bg-gray-800/70 hover:bg-gray-700/70 px-3 py-2 rounded-lg border border-gray-700 transition-all"
                   >
                     {typeof tech.icon === "string" ? (
-                      <img src={tech.icon} alt={tech.name} className="w-5 h-5" />
+                      <Image src={tech.icon} alt={tech.name} className="w-5 h-5" />
                     ) : (
                       React.cloneElement(tech.icon, {
                         className: `${tech.icon.props.className || ""} text-xl`,

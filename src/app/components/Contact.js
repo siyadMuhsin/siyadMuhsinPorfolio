@@ -45,10 +45,10 @@ export default function Contact() {
             <div className="space-y-6">
               <div>
                 <h3 className="text-2xl font-semibold mb-4 text-white">
-                  Let's Connect
+                  Let&apos;s Connect
                 </h3>
                 <p className="text-gray-400 mb-6">
-                  I'm always interested in new opportunities and exciting projects. 
+                  I&apos;m always interested in new opportunities and exciting projects. 
                   Whether you have a question or just want to say hi, feel free to reach out!
                 </p>
               </div>

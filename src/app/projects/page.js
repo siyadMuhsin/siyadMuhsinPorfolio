@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { FiGithub, FiExternalLink } from "react-icons/fi"
 import projects from "@/data/projects"
+import Image from "next/image"
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -39,7 +40,7 @@ export default function ProjectsPage() {
             >
               {/* Project Image */}
               <div className="h-48 overflow-hidden">
-                <img
+                <Image
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover"
