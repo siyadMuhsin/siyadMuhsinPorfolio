@@ -52,7 +52,7 @@ export default function AboutPage() {
             <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl border-4 border-green-500/30 hover:border-green-500/60 transition-all duration-500">
               <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-transparent rounded-full"></div>
               <Image
-                src="/profile.jpg"
+                src="/myImages/profile.jpg"
                 alt="Siyad Muhsin K"
                 fill
                 className="object-cover hover:scale-110 transition-transform duration-700"

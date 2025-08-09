@@ -100,7 +100,7 @@ export default function Contact() {
                   <Github size={20} className="text-white" />
                 </a>
                 <a
-                  href="https://linkedin.com/in/siyad"
+                  href="https://linkedin.com/in/siyad-muhsin"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700 transition-colors border border-green-600 hover:border-green-400"

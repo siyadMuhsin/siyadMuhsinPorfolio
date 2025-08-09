@@ -15,7 +15,7 @@ export default function About() {
             <div className="w-full lg:w-1/3 flex justify-start">
               <div className="rounded-2xl overflow-hidden shadow-lg border-4 border-green-600">
                 <Image
-                  src="/profile.jpeg" // <-- Change to your image path
+                  src="/myImages/images3.jpg" // <-- Change to your image path
                   alt="Profile Picture"
                   width={300}
                   height={300}
