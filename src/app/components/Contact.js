@@ -2,8 +2,11 @@
 
 import { useState } from 'react'
 import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react'
-
+import emailjs from 'emailjs-com'
 export default function Contact() {
+    const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState(""); // 
+  const [loading,setLoading]=useState(false)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -18,21 +21,82 @@ export default function Contact() {
     })
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', formData)
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    })
-    alert('Thank you for your message! I\'ll get back to you soon.')
+ const handleSubmit = (e) => {
+  e.preventDefault();
+ 
+  // Basic validation
+  if (!formData.name.trim()) {
+    setAlertType("error");
+    setAlertMessage("❌ Please enter your name.");
+    setTimeout(() => setAlertMessage(""), 5000);
+    return;
   }
+  if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    setAlertType("error");
+    setAlertMessage("❌ Please enter a valid email address.");
+    setTimeout(() => setAlertMessage(""), 5000);
+    return;
+  }
+  if (!formData.subject.trim()) {
+    setAlertType("error");
+    setAlertMessage("❌ Please enter a subject.");
+    setTimeout(() => setAlertMessage(""), 5000);
+    return;
+  }
+  if (!formData.message.trim()) {
+    setAlertType("error");
+    setAlertMessage("❌ Please enter your message.");
+    setTimeout(() => setAlertMessage(""), 5000);
+    return;
+  }
+  // Mobile number is optional → No validation unless entered
+  if (formData.mobile && !/^\d{10,15}$/.test(formData.mobile)) {
+    setAlertType("error");
+    setAlertMessage("❌ Please enter a valid mobile number (10–15 digits).");
+    setTimeout(() => setAlertMessage(""), 5000);
+    return;
+  }
+ setLoading(true)
+  // Send email
+  emailjs
+    .send(
+      process.env.NEXT_PUBLIC_SERVICE_ID,
+      process.env.NEXT_PUBLIC_TEMPLATE_ID,
+      {
+        from_name: formData.name,
+        from_email: formData.email,
+        mobile: formData.mobile || "Not provided", // Send to email even if empty
+        subject: formData.subject,
+        message: formData.message
+      },
+      process.env.NEXT_PUBLIC_PUBLIC_KEY
+    )
+    .then(() => {
+      setAlertType("success");
+      setAlertMessage("✅ Thank you! Your message has been sent.");
+      setFormData({
+        name: "",
+        email: "",
+        mobile: "",
+        subject: "",
+        message: ""
+      });
+      setLoading(false)
+      setTimeout(() => setAlertMessage(""), 5000);
+    })
+    .catch((error) => {
+      console.error("Email send failed:", error);
+      setAlertType("error");
+      setAlertMessage("❌ Oops! Something went wrong. Please try again.");
+      setLoading(false)
+      setTimeout(() => setAlertMessage(""), 5000);
+    });
+};
 
   return (
+    <>
+    
+     
     <section id="contact" className="py-16 bg-black">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
@@ -161,6 +225,20 @@ export default function Contact() {
                     placeholder="What's this about?"
                   />
                 </div>
+                 <div>
+                  <label htmlFor="mobile" className="block text-sm font-medium text-gray-300 mb-2">
+                    Mobile
+                  </label>
+                  <input
+                    type="text"
+                    id="mobile"
+                    name="mobile"
+                    value={formData.mobile}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gray-800 border border-gray-700 text-white placeholder-gray-500"
+                    placeholder="Mobile Number (Optional)"
+                  />
+                </div>
                 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
@@ -177,19 +255,71 @@ export default function Contact() {
                     placeholder="Your message..."
                   />
                 </div>
+                 {alertMessage && (
+        <div
+          style={{
+            top:'10px',
+            right:'0px',
+            padding: "10px",
+            marginBottom: "10px",
+            borderRadius: "5px",
+            backgroundColor: alertType === "success" ? "#d4edda" : "#f8d7da",
+            color: alertType === "success" ? "#155724" : "#721c24",
+            border: alertType === "success"
+              ? "1px solid #c3e6cb"
+              : "1px solid #f5c6cb"
+          }}
+        >
+          {alertMessage}
+        </div>
+      )}
                 
-                <button
-                  type="submit"
-                  className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 group"
-                >
-                  <span>Send Message</span>
-                  <Send size={18} className="group-hover:translate-x-1 transition-transform" />
-                </button>
+                 <button
+        type="submit"
+        className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 group"
+        disabled={loading} // Disable while loading
+      >
+        {loading ? (
+          <>
+            <svg
+              className="animate-spin h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+              ></path>
+            </svg>
+            <span>Sending...</span>
+          </>
+        ) : (
+          <>
+            <span>Send Message</span>
+            <Send
+              size={18}
+              className="group-hover:translate-x-1 transition-transform"
+            />
+          </>
+        )}
+      </button>
+                
               </form>
             </div>
           </div>
         </div>
       </div>
     </section>
+    </>
   )
 }
