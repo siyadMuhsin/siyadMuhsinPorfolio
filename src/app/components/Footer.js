@@ -13,7 +13,7 @@ export default function Footer() {
             
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <a
-                href="/resume.pdf"
+                href="/siyad_resume.pdf"
                 download
                 className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 border border-green-600 hover:border-green-400"
               >
